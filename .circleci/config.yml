@@ -11,9 +11,6 @@ jobs:
       # Step 1: obtain repo from GitHub
       - checkout
       - setup_remote_docker
-      - sonarcloud/scan
-
-        
 
       - run:
           name: Install Docker client

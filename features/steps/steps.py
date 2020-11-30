@@ -8,7 +8,7 @@ def step_impl(context, values):
 
 @when('Bill show the products')
 def step_impl(context):
-    context.total = context.venta.realizarVenta(String(context.values[0]),String(context.values[1]))
+    context.total = context.venta.realizarVenta(String(context.products[0]),String(context.products[1]))
 
 @then('the {total:d} of products')
 def step_impl(context, total):

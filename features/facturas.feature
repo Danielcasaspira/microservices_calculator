@@ -3,7 +3,7 @@ Feature: Bill
 Scenario Outline: Get Bill
     Given a <products> to show 
     When Bill show the products
-    Then <total> of products'sum
+    Then <total> of products
 
     Examples: products
     | products,quantity |  total  |

@@ -3,12 +3,6 @@ version: 2
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.0
     
-workflows:
-  my-workflow:
-    jobs:
-      - build:
-          context: sonarcloud  
-
 jobs:
   build:
     docker:

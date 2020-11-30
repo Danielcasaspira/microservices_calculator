@@ -23,7 +23,7 @@ jobs:
           command: >
             export SONAR_SCANNER_OPTS="-Xmx2048m"
 
-            eval ./sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner
+             sudo eval ./sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner
             -Dsonar.projectKey=<< parameters.app >> \
             -Dsonar.sources=. \
             -Dsonar.sourceEncoding=US-ASCII \      

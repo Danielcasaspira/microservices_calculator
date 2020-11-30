@@ -5,37 +5,37 @@ jobs:
     docker:
       - image: circleci/python:3.5
     working_directory: ~/repo
+    parameters:
+        sonar_server_url:
+            type: string
+            description: "URL of your SonarQube server. e.g.: http://my.sonarqube,server:9000"
+            default: "$SONAR_SERVER"
+        sonar_login:
+            description: "Authentication key (sonar.login paramter) to access SonarQube and perform analysis"
+            type: string
+            default: "$SONAR_TOKEN"
+        sonar_sources:
+            description: "Where the files are located?"
+            type: string
+            default: "$SONAR_SOURCES"
     steps:
       # Step 1: obtain repo from GitHub
       - checkout
       - setup_remote_docker
 
       - run:
-          name: Install Sonarqube scanner
-          command: >
-            wget
-            https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip
+        name: Install Sonarqube scanner
+        command: |
+            wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873.zip
+            unzip sonar-scanner-cli-4.2.0.1873.zip
 
-            sudo unzip sonar-scanner-cli-3.2.0.1227-linux.zip
-
-      - run:
-          name: Run Sonarqube scanner
-          command: |
+    - run:
+        name: Run Sonarscanner
+        command: |
             export SONAR_SCANNER_OPTS="-Xmx2048m"
-
-             eval ./sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner
-            -Dsonar.projectKey=<< parameters.app >> \
-            -Dsonar.sources=. \
-            -Dsonar.sourceEncoding=US-ASCII \      
-
-            -Dsonar.exclusions=vendor/bundle/** \
-
-            -Dsonar.host.url=https://sonarqube.onehq.com \
-
-            -Dsonar.projectVersion=${CIRCLE_BRANCH} \
-
-            -Dsonar.login=${SONARQUBE_TOKEN} $SONAR_SCANNER_OPTS_CUSTOM      
-
+            eval ./sonar-scanner-4.2.0.1873/bin/sonar-scanner -Dsonar.host.url=<< parameters.sonar_server_url >> \
+            -Dsonar.sources=<< parameters.sonar_sources >> \
+            -Dsonar.login=<< parameters.sonar_login >>
       - run:
           name: Install Docker client
           command: |

@@ -17,7 +17,10 @@ jobs:
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
       - run: 
           name: build docker-compose
-          command: sudo docker-compose build
+          command: |
+          export DOCKER_HOST=127.0.0.1
+          sudo docker-compose build
+          
 
       - run:
           name: Start container and verify it's working

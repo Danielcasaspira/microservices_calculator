@@ -5,8 +5,8 @@ Given a <products> to show
 When Bill show the products
 Then <total> of products
 
-    Examples: products
-    | products          |  total  |
+Examples: products
+    | products        |  total  |
     | papa,2          |  3000   |     
     | arroz,3         |  3000   |   
     | aceite,2        |  6000   | 

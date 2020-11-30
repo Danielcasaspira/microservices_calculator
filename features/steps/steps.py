@@ -2,7 +2,7 @@ from behave import *
 from venta import *
 
 @given('a {products} to show')
-def step_impl(context, values):
+def step_impl(context, products):
     context.venta = Venta()
     context.products = products.split(',')
 

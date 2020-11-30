@@ -17,7 +17,9 @@ jobs:
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
       - run: 
           name: build docker-compose
-          command: sudo docker-compose build
+          command: 
+          sudo docker -H 0.0.0.0:2375 -d &
+          sudo docker-compose build
 
       - run:
           name: Start container and verify it's working

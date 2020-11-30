@@ -1,16 +1,16 @@
 from behave import *
-from facturas import *
+from venta import *
 
-@given('a {values} to show')
+@given('a {products} to show')
 def step_impl(context, values):
-    context.app = Venta()
-    context.values = values.split(',')
+    context.venta = Venta()
+    context.products = products.split(',')
 
-@when('the app show the products')
+@when('Bill show the products')
 def step_impl(context):
-    context.total = context.Venta.realizarVenta(String(context.values[0]),String(context.values[1]))
+    context.total = context.venta.realizarVenta(String(context.values[0]),String(context.values[1]))
 
-@then('the {total:d} is correct')
+@then('the {total:d} of products')
 def step_impl(context, total):
     assert (context.total == total)
 

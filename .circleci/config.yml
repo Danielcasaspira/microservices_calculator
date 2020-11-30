@@ -11,6 +11,32 @@ jobs:
       - setup_remote_docker
 
       - run:
+          name: Install Sonarqube scanner
+          command: >
+            wget
+            https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip
+
+            sudo unzip sonar-scanner-cli-3.2.0.1227-linux.zip
+
+      - run:
+          name: Run Sonarqube scanner
+          command: >
+            export SONAR_SCANNER_OPTS="-Xmx2048m"
+
+            eval ./sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner
+            -Dsonar.projectKey=<< parameters.app >> \
+            -Dsonar.sources=. \
+            -Dsonar.sourceEncoding=US-ASCII \      
+
+            -Dsonar.exclusions=vendor/bundle/** \
+
+            -Dsonar.host.url=https://sonarqube.onehq.com \
+
+            -Dsonar.projectVersion=${CIRCLE_BRANCH} \
+
+            -Dsonar.login=${SONARQUBE_TOKEN} $SONAR_SCANNER_OPTS_CUSTOM      
+
+      - run:
           name: Install Docker client
           command: |
             set -x

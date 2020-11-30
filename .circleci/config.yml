@@ -8,8 +8,7 @@ jobs:
     steps:
       # Step 1: obtain repo from GitHub
       - checkout
-      - setup_remote_docker: 
-        docker_layer_caching: false
+      - setup_remote_docker
 
       - run:
           name: Install Docker client

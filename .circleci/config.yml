@@ -2,13 +2,7 @@
 version: 2
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.0
-jobs:
-  build:
-    docker:
-      - image: 'circleci/python:3.7.4'
-    steps:
-    - checkout
-    - sonarcloud/scan
+    
 workflows:
   my-workflow:
     jobs:
@@ -25,7 +19,7 @@ jobs:
       # Step 1: obtain repo from GitHub
       - checkout
       - setup_remote_docker
-
+      - sonarcloud/scan
       - run:
           name: Install Docker client
           command: |

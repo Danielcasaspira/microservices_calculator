@@ -9,7 +9,16 @@ jobs:
       # Step 1: obtain repo from GitHub
       - checkout
 
-     
+      - run:
+          name: Install Docker Compose
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+      - run: 
+          name: build docker-compose
+          command: sudo docker-compose build
+
       - run:
           name: Start container and verify it's working
           command: |

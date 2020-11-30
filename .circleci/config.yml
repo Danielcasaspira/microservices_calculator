@@ -16,12 +16,6 @@ jobs:
             . venv/bin/activate
             pip install --upgrade pip
             pip install -r requirements.txt
-      # Step 3: pytest
-      - run:
-          name: run test
-          command: |
-            . venv/bin/activate
-            pytest
       # Step 4: behave test
       - run:
           name: behave test

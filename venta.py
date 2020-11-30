@@ -15,6 +15,6 @@ class Venta():
             if key == 'valor_total':
                 valor_total = value
 
-        return 3000
+        return valor_total
 
 
